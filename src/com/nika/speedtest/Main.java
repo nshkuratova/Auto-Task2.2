@@ -11,8 +11,8 @@ public class Main {
         Date start;
         Date finish;
 
-        ArrayList arrayList = new ArrayList();
-        LinkedList linkedList = new LinkedList();
+        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        LinkedList<Integer> linkedList = new LinkedList<Integer>();
 
         System.out.println("~~~~~~~~~~~~~~~Comparing ArrayList and LinkedList~~~~~~~~~~~~~~~");
         System.out.println("\n--- Adding 1,000,000 elements");
@@ -34,11 +34,45 @@ public class Main {
         finish = new Date();
         timeCounter(start, finish);
 
+        System.out.println("\n--- Searching for elements");
+        int seachString = 999541;
+        boolean found = false;
+        System.out.print("ArrayList: ");
+
+        start = new Date();
+
+        for (Integer value : arrayList) {
+            if (seachString == value) {
+                found = true;
+            }
+            if (found) {
+                break;
+            }
+        }
+
+        finish = new Date();
+        timeCounter(start, finish);
+
+        System.out.print("LinkedList: ");
+        found = false;
+
+        for (Integer value : linkedList) {
+            if (seachString == value) {
+                found = true;
+            }
+            if (found) {
+                break;
+            }
+        }
+
+        finish = new Date();
+        timeCounter(start, finish);
+
         System.out.println("\n--- Removing 1,000,000 elements from the end");
         System.out.print("ArrayList: ");
 
         start = new Date();
-        for (int i = arrayList.size()-1; i >= 0; i--) {
+        for (int i = arrayList.size() - 1; i >= 0; i--) {
             arrayList.remove(i);
         }
         finish = new Date();
@@ -47,11 +81,12 @@ public class Main {
         System.out.print("LinkedList: ");
 
         start = new Date();
-        for (int i = linkedList.size()-1; i >= 0; i--) {
+        for (int i = linkedList.size() - 1; i >= 0; i--) {
             linkedList.remove(i);
         }
         finish = new Date();
         timeCounter(start, finish);
+
 
     }
 
