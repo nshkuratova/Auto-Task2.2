@@ -15,7 +15,7 @@ public class Main {
         LinkedList linkedList = new LinkedList();
 
         System.out.println("~~~~~~~~~~~~~~~Comparing ArrayList and LinkedList~~~~~~~~~~~~~~~");
-        System.out.println("--- Adding 1,000,000 elements ---");
+        System.out.println("\n--- Adding 1,000,000 elements");
         System.out.print("ArrayList: ");
 
         start = new Date();
@@ -34,7 +34,7 @@ public class Main {
         finish = new Date();
         timeCounter(start, finish);
 
-        System.out.println("--- Removing 1,000,000 elements from the end ---");
+        System.out.println("\n--- Removing 1,000,000 elements from the end");
         System.out.print("ArrayList: ");
 
         start = new Date();
