@@ -1,96 +1,87 @@
 package com.nika.speedtest;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Main {
 
+    private static final int ITERATION_COUNT = 10_000;
+
     public static void main(String[] args) {
 
-        Date start;
-        Date finish;
+        long start;
+        long finish;
 
-        ArrayList<Integer> arrayList = new ArrayList<Integer>();
-        LinkedList<Integer> linkedList = new LinkedList<Integer>();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        LinkedList<Integer> linkedList = new LinkedList<>();
 
         System.out.println("~~~~~~~~~~~~~~~Comparing ArrayList and LinkedList~~~~~~~~~~~~~~~");
-        System.out.println("\n--- Adding 1,000,000 elements");
-        System.out.print("ArrayList: ");
+        System.out.println("\n--- Adding " + ITERATION_COUNT + " elements");
 
-        start = new Date();
-        for (int i = 0; i < 1000000; i++) {
-            arrayList.add(i);
-        }
-        finish = new Date();
+        System.out.print("ArrayList: ");
+        start = getCurrentTime();
+        addElements(arrayList);
+        finish = getCurrentTime();
         timeCounter(start, finish);
 
         System.out.print("LinkedList: ");
-
-        start = new Date();
-        for (int i = 0; i < 1000000; i++) {
-            linkedList.add(i);
-        }
-        finish = new Date();
+        start = getCurrentTime();
+        addElements(linkedList);
+        finish = getCurrentTime();
         timeCounter(start, finish);
 
         System.out.println("\n--- Searching for elements");
-        int seachString = 999541;
-        boolean found = false;
+
         System.out.print("ArrayList: ");
-
-        start = new Date();
-
-        for (Integer value : arrayList) {
-            if (seachString == value) {
-                found = true;
-            }
-            if (found) {
-                break;
-            }
-        }
-
-        finish = new Date();
+        start = getCurrentTime();
+        findElements(arrayList);
+        finish = getCurrentTime();
         timeCounter(start, finish);
 
         System.out.print("LinkedList: ");
-        found = false;
-
-        for (Integer value : linkedList) {
-            if (seachString == value) {
-                found = true;
-            }
-            if (found) {
-                break;
-            }
-        }
-
-        finish = new Date();
+        start = getCurrentTime();
+        findElements(linkedList);
+        finish = getCurrentTime();
         timeCounter(start, finish);
 
-        System.out.println("\n--- Removing 1,000,000 elements from the end");
-        System.out.print("ArrayList: ");
+        System.out.println("\n--- Removing " + ITERATION_COUNT + " elements");
 
-        start = new Date();
-        for (int i = arrayList.size() - 1; i >= 0; i--) {
-            arrayList.remove(i);
-        }
-        finish = new Date();
+        System.out.print("ArrayList: ");
+        start = getCurrentTime();
+        removeElements(arrayList);
+        finish = getCurrentTime();
         timeCounter(start, finish);
 
         System.out.print("LinkedList: ");
-
-        start = new Date();
-        for (int i = linkedList.size() - 1; i >= 0; i--) {
-            linkedList.remove(i);
-        }
-        finish = new Date();
+        start = getCurrentTime();
+        removeElements(linkedList);
+        finish = getCurrentTime();
         timeCounter(start, finish);
-
 
     }
 
-    static void timeCounter(Date start, Date end) {
-        System.out.println(end.getTime() - start.getTime() + "ms");
+    private static long getCurrentTime() {
+        return System.currentTimeMillis();
+    }
+
+    private static void timeCounter(long start, long end) {
+        System.out.println(end - start + "ms");
+    }
+
+    private static void addElements(Collection<Integer> collection) {
+        for (int i = 0; i < ITERATION_COUNT; i++) {
+            collection.add(i);
+        }
+    }
+
+    private static void findElements(Collection<Integer> collection) {
+        for (int i = 0; i < ITERATION_COUNT; i++) {
+            collection.contains(i);
+        }
+    }
+
+    private static void removeElements(Collection<Integer> collection) {
+        for (int i = 0; i < ITERATION_COUNT; i++) {
+            collection.remove(i);
+        }
     }
 }
